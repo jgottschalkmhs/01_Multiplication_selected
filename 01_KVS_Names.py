@@ -16,12 +16,14 @@ def num_check(question):
             except ValueError:
                 print("Please enter a valid number")
 
+
 def ask_question(first, second, who):
     question = "{}: What is {} x {}? ".format(who, first, second)
     answer = first * second
     ask = num_check(question)
-    if answer == "xxx":
-        print("you chose to quit")
+    if ask == "xxx":
+        fdbck = ""
+        outcome = "xxx"
     elif ask == answer:
         fdbck = random.choice(well_done)
         outcome = "right"
@@ -53,7 +55,7 @@ well_done = ["great job", "well done", "ka pai", "awesome", "fantastic"]
 
 table = ""
 while table != "xxx":
-    table = num_check("Choose a times table (or 'xxx' to quit): ")
+    table = num_check("Choose a times table (or 'xxx' to start playing): ")
 
     if len(tables) <= 0 and table == "xxx":
         print("You must choose at least one table")
@@ -72,6 +74,10 @@ while do_it != "xxx":
     call_on = random.choice(all_students)
 
     do_it = "wrong"
-    while do_it == "wrong" and do_it != "xxx":
+    while do_it == "wrong":
         do_it = ask_question(num_1, num_2, call_on)
+        print(do_it)
+        if do_it == "xxx":
+            print("you want to quit")
+            break
 
