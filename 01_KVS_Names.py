@@ -16,6 +16,21 @@ def num_check(question):
             except ValueError:
                 print("Please enter a valid number")
 
+def ask_question(first, second, who):
+    question = "{}: What is {} x {}? ".format(who, first, second)
+    answer = first * second
+    ask = num_check(question)
+    if answer == "xxx":
+        print("you chose to quit")
+    elif ask == answer:
+        fdbck = random.choice(well_done)
+        outcome = "right"
+    else:
+        fdbck = "oops - try again"
+        outcome = "wrong"
+
+    print(fdbck)
+    return outcome
 
 # Get names from txt file and add to list
 
@@ -46,8 +61,8 @@ while table != "xxx":
     elif table != "xxx":
         tables.append(table)
 
-answer = ""
-while answer != "xxx":
+do_it = ""
+while do_it != "xxx":
 
     # Generate question and answer
     num_1 = random.choice(tables)
@@ -56,15 +71,7 @@ while answer != "xxx":
     # Call a student
     call_on = random.choice(all_students)
 
-    question = "{}: What is {} x {}? ".format(call_on, num_1, num_2)
-    answer = num_1 * num_2
-    ask = num_check(question)
-    if answer == "xxx":
-        print("you chose to quit")
-    elif ask == answer:
-        fdbck = random.choice(well_done)
-    else:
-        fdbck = "oops - try again"
-
-    print(fdbck)
+    do_it = "wrong"
+    while do_it == "wrong" and do_it != "xxx":
+        do_it = ask_question(num_1, num_2, call_on)
 
