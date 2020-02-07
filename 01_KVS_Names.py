@@ -18,17 +18,17 @@ def num_check(question):
 
 
 def ask_question(first, second, who):
-    question = "{}: What is {} x {}? ".format(who, first, second)
+    question = input("What is {} x {}... <press enter> ".format(first, second))
+    if question == "xxx":
+        return "xxx"
+    ask = num_check("{}: ".format(who))
     answer = first * second
-    ask = num_check(question)
-    if ask == "xxx":
-        fdbck = ""
-        outcome = "xxx"
-    elif ask == answer:
+
+    if ask == answer:
         fdbck = random.choice(well_done)
         outcome = "right"
     else:
-        fdbck = "oops - try again"
+        fdbck = "oops - {} x {} = {}".format(first, second, answer)
         outcome = "wrong"
 
     print(fdbck)
@@ -49,17 +49,21 @@ for item in csv_students:
     item = "".join(item)
     all_students.append(item)
 
-# Ask for times table/s to be used
+# Initialises lists
 tables = []
 well_done = ["great job", "well done", "ka pai", "awesome", "fantastic"]
 
 table = ""
 while table != "xxx":
-    table = num_check("Choose a times table (or 'xxx' to start playing): ")
+    table = num_check("Choose a times table (or 'xxx' to start playing)\n  For all tables, type 0 (zero): ")
 
     if len(tables) <= 0 and table == "xxx":
         print("You must choose at least one table")
         table = ""
+    elif table == 0:
+        for item in range(2, 13):
+            tables.append(item)
+            table = "xxx"
     elif table != "xxx":
         tables.append(table)
 
@@ -76,8 +80,7 @@ while do_it != "xxx":
     do_it = "wrong"
     while do_it == "wrong":
         do_it = ask_question(num_1, num_2, call_on)
-        print(do_it)
+
         if do_it == "xxx":
-            print("you want to quit")
             break
 
